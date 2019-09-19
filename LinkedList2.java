@@ -77,8 +77,8 @@ class LinkedList2
         /* Constructed Linked List is 1->2->3->4->5->null */
         Scanner values = new Scanner(System.in);
             System.out.println("Enter how many values you want to enter");
-            int j= values.nextInt();
-         for(j = 0; j< 5; j++)
+            int n= values.nextInt();
+         for(int j = 0; j< n; j++)
          {  Scanner myObj = new Scanner(System.in);
             System.out.println("Enter values");
             int val= myObj.nextInt();
