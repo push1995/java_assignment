@@ -1,72 +1,96 @@
-public class LinkedList2 { 
+import java.util.Scanner;
+class LinkedList2 
+{ 
+    Node head;  // head of list 
+   
+    /* Linked list Node*/
+    class Node 
+    { 
+        int data; 
+        Node next; 
+        Node(int d) {data = d; next = null; } 
+    } 
   
-
-
-	class Node{
-		int data;
-		Node next;
-		public Node(int data){
-			this.data=data;
-			this.next=null;
-		}
-	}
-	public Node head=null;
-	public Node tail=null;
-	public void addStart(int data)
-	{
-		Node newNode=new Node(data);
-		if(head==null)
-		{
-			head=newNode;
-			tail=newNode;
-		}
-		else{
-			Node temp=head;
-			head=newNode;
-			head.next=temp;
-		}
-	}
-	public void deleteFromFirst(){
-		if(head==null){
-			System.out.println("List is empty");
- 			return;
-		}
-		else{
-			if(head!=tail){
-				head=head.next;
-			}
-			else{
-				head=tail=null;
-			}
-		}
-	}
-	public void display(){
-		Node current=head;
-		if(head==null){
-			System.out.println("List is empty");
-			return;
-		}
-		System.out.println("Adding nodes to start of the list");
-		while(current!=null){
-			System.out.println(current.data+" ");
-			current=current.next;
-		}
-		System.out.println();
-	}
-	public static void main(String[] args)
-	{
-		LinkedList2 slist=new LinkedList2();
-		slist.addStart(1);
-		slist.addStart(2);
-		slist.display();
-		slist.addStart(3);
-		slist.display();
-		slist.addStart(4);
-		slist.display();
-		slist.deleteFromFirst();
-		slist.display();
-	}
-}	
-
-			
-
+    void moveToFront() 
+    { 
+        /* If linked list is empty or it contains only 
+           one node then simply return. */
+           if(head == null || head.next == null)  
+              return; 
+  
+        /* Initialize second last and last pointers */
+        Node secLast = null; 
+        Node last = head; 
+  
+        /* After this loop secLast contains address of  
+           second last  node and last contains address of  
+           last node in Linked List */
+        while (last.next != null)   
+        { 
+           secLast = last; 
+           last = last.next;  
+        } 
+  
+        /* Set the next of second last as null */
+        secLast.next = null; 
+  
+        /* Set the next of last as head */
+        last.next = head; 
+  
+        /* Change head to point to last node. */
+        head = last; 
+    }                  
+  
+                      
+    /* Utility functions */
+  
+    /* Inserts a new Node at front of the list. */
+    public void insert(int new_data) 
+    { 
+        /* 1 & 2: Allocate the Node & 
+                  Put in the data*/
+        Node new_node = new Node(new_data); 
+   
+        /* 3. Make next of new Node as head */
+        new_node.next = head; 
+   
+        /* 4. Move the head to point to new Node */
+        head = new_node; 
+    } 
+  
+    /* Function to print linked list */
+    void printList() 
+    { 
+        Node temp = head; 
+        while(temp != null) 
+        { 
+           System.out.print(temp.data+" "); 
+           temp = temp.next; 
+        }   
+        System.out.println(); 
+    } 
+  
+     /* Drier program to test above functions */
+    public static void main(String args[]) 
+    { 
+        LinkedList2 llist = new LinkedList2(); 
+        /* Constructed Linked List is 1->2->3->4->5->null */
+        Scanner values = new Scanner(System.in);
+            System.out.println("Enter how many values you want to enter");
+            int j= values.nextInt();
+         for(j = 0; j< 5; j++)
+         {  Scanner myObj = new Scanner(System.in);
+            System.out.println("Enter values");
+            int val= myObj.nextInt();
+            llist.insert(val); 
+         }
+          
+        System.out.println("Linked List before moving last to front "); 
+        llist.printList(); 
+          
+        llist.moveToFront(); 
+          
+        System.out.println("Linked List after moving last to front "); 
+        llist.printList(); 
+    } 
+}  
